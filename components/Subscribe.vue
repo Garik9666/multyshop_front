@@ -2,15 +2,15 @@
   <div>
     <v-container>
       <v-row justify="center">
-        <v-col cols="8">
+        <v-col md="8" sm="12">
           <v-row justify="center" >
-            <v-col cols="6">
+            <v-col md="6"  sm="10" xs="12">
               <h1 class="grey--text text-center mb-5">ԲԱԺԱՆՈՐԴԱԳՐՎԵԼ</h1>
               <p class="grey--text "> Բաժանորդագրվեք Մեր նամակներին և առաջինը տեղեկացեք նորույթների, զեղչերի և ակցիաների վերաբերյալ:</p>
               <ValidationObserver ref="observer" v-slot="{ validate, reset }">
                 <form>
                   <v-row align="center" justify="center">
-                    <v-col cols="9">
+                    <v-col md="9" sm="12">
                       <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
                         <v-text-field
                           v-model="email"
