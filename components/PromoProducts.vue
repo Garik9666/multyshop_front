@@ -7,7 +7,7 @@
       v-model="model"
       class="pa-4"
       center-active
-      show-arrows
+      :show-arrows="false"
     >
       <v-slide-item
         v-for="n in count"
@@ -19,7 +19,7 @@
           <v-card
             color="grey lighten-4"
             class="ma-4"
-            width="400"
+            width="270"
           >
             <v-img
               :aspect-ratio="16/9"
@@ -27,36 +27,34 @@
             >
             </v-img>
             <v-slide-y-reverse-transition>
-            <v-card-text
-              v-if="hover"
-              class="pt-6"
-              style="position: absolute; bottom: 0; background-color: #b20839c9"
-            >
-              <v-btn
-                absolute
-                color="#01235e"
-                class="white--text"
-                fab
-                large
-                right
-                top
+              <v-card-text
+                v-show="hover"
+                class="pt-6"
+                style="position: absolute; bottom: 0; background-color: #b20839c9; height: 80px"
               >
-                <v-icon large>mdi-cart</v-icon>
-              </v-btn>
-              <v-btn
-                absolute
-                color="#01235e"
-                class="white--text"
-                fab
-                large
-                top
-                style="right: 90px"
-              >
-                <v-icon large>mdi-heart</v-icon>
-              </v-btn>
-              <h2 class=" font-weight-light font-weight-bold white--text mb-2">QW cooking utensils</h2>
-              <p class="price white--text"><span class="font-weight-bold">Price</span> 15.000 AMD</p>
-            </v-card-text>
+                <v-btn
+                  absolute
+                  color="#01235e"
+                  class="white--text"
+                  fab
+                  right
+                  top
+                >
+                  <v-icon>mdi-cart</v-icon>
+                </v-btn>
+                <v-btn
+                  absolute
+                  color="#01235e"
+                  class="white--text"
+                  fab
+                  top
+                  style="right: 90px"
+                >
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+                <h3 class=" font-weight-light font-weight-bold white--text mb-2">QW cooking utensils</h3>
+                <p class="price white--text"><span class="font-weight-bold">Price</span> 15.000 AMD</p>
+              </v-card-text>
             </v-slide-y-reverse-transition>
           </v-card>
         </v-hover>
@@ -82,6 +80,13 @@
     background-color: #01235e;
   }
   .price{
-    font-size: 20px;
+    font-size: 18px;
+  }
+  .v-card--reveal {
+    align-items: center;
+    bottom: 0;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
   }
 </style>

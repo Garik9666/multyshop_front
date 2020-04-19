@@ -5,12 +5,12 @@
         <v-col md="8" sm="12">
           <v-row justify="center" >
             <v-col md="6"  sm="10" xs="12">
-              <h1 class="grey--text text-center mb-5">ԲԱԺԱՆՈՐԴԱԳՐՎԵԼ</h1>
+              <h2 class="grey--text text-center mb-5">ԲԱԺԱՆՈՐԴԱԳՐՎԵԼ</h2>
               <p class="grey--text "> Բաժանորդագրվեք Մեր նամակներին և առաջինը տեղեկացեք նորույթների, զեղչերի և ակցիաների վերաբերյալ:</p>
               <ValidationObserver ref="observer" v-slot="{ validate, reset }">
                 <form>
                   <v-row align="center" justify="center">
-                    <v-col md="9" sm="12">
+                    <v-col md="10" sm="12">
                       <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
                         <v-text-field
                           v-model="email"
@@ -20,7 +20,7 @@
                         ></v-text-field>
                       </ValidationProvider>
                     </v-col>
-                    <v-col cols="3 text-right">
+                    <v-col md="2" class="text-right">
                       <v-btn @click="submit">submit</v-btn>
                     </v-col>
                   </v-row>
