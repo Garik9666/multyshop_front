@@ -381,7 +381,7 @@ export default {
 </script>
 <style>
   body{
-    overflow-y: hidden;
+    overflow-x: hidden;
   }
   .nav_button{
     /*background-color: #ccc;*/
