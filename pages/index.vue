@@ -17,7 +17,7 @@
           <PromoProducts :count="7"></PromoProducts>
           <h1  class="text-center mb-5">New Products</h1>
           <PromoProducts :count="7"></PromoProducts>
-          <Subscribe></Subscribe>
+<!--          <Subscribe></Subscribe>-->
 
         </v-container>
       </div>
