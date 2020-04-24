@@ -1,22 +1,23 @@
 <template>
       <div>
         <HeadSlider></HeadSlider>
-        <Brands></Brands>
-        <h1 class="text-center">For Mean</h1>
-        <ProductsSlider :count="10"></ProductsSlider>
-        <h1 class="text-center">For Woman</h1>
-        <ProductsSlider :count="15"></ProductsSlider>
-
         <v-container>
+        <Brands></Brands>
+        <MiddleBanner></MiddleBanner>
+<!--        <h1 class="text-center">For Mean</h1>-->
+<!--        <ProductsSlider :count="10"></ProductsSlider>-->
+<!--        <h1 class="text-center">For Woman</h1>-->
+<!--        <ProductsSlider :count="15"></ProductsSlider>-->
+
+          <h1  class="text-center mb-5">Top Sales</h1>
+          <PromoProducts :count="7"></PromoProducts>
+          <h1  class="text-center mb-5">New Products</h1>
+          <PromoProducts :count="7"></PromoProducts>
           <v-row justify="center">
             <v-col :cols="8">
               <v-img src="/baner.png" max-height="640" aspect-ratio="1"></v-img>
             </v-col>
           </v-row>
-          <h1  class="text-center mb-5">Top Sales</h1>
-          <PromoProducts :count="7"></PromoProducts>
-          <h1  class="text-center mb-5">New Products</h1>
-          <PromoProducts :count="7"></PromoProducts>
           <Subscribe></Subscribe>
 
         </v-container>
@@ -29,6 +30,7 @@ import Brands from '~/components/Brands.vue'
 import ProductsSlider from '~/components/ProductsSlider.vue'
 import PromoProducts from '~/components/PromoProducts.vue'
 import Subscribe from '~/components/Subscribe.vue'
+import MiddleBanner from "../components/MiddleBanner";
 
 export default {
   components: {
@@ -36,7 +38,8 @@ export default {
     Brands,
     ProductsSlider,
     PromoProducts,
-    Subscribe
+    Subscribe,
+    MiddleBanner
   },
   data () {
     return {

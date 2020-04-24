@@ -12,6 +12,7 @@
         height="300"
         width="30%"
         min-width="300"
+        to="/brand/polo"
       >
         <v-img
           :src="slide.src"

@@ -51,7 +51,8 @@
         no-gutters
       >
         <v-menu :open-on-hover="true"
-                bottom offset-y
+                bottom
+                offset-y
                 v-for="(item, i) in leftSide"
                 dark
                 :key="i">
@@ -65,7 +66,7 @@
               text
               class="my-2 nav_button"
               v-on="on"
-              bottom="0"
+              bottom
             >
               {{item.title}}
             </v-btn>
@@ -94,7 +95,8 @@
       >
 
         <v-menu :open-on-hover="true"
-                bottom offset-y
+                bottom
+                offset-y
                 v-for="(item, i) in rightSide"
                 dark
                 :key="i">
@@ -108,7 +110,7 @@
               text
               class="my-2 nav_button"
               v-on="on"
-              bottom="0"
+              bottom
             >
               {{item.title}}
             </v-btn>
@@ -175,7 +177,6 @@
           </template>
           <v-card>
             <v-tabs
-              v-model="tab"
               background-color="deep-purple accent-4"
               class="elevation-2"
               dark
