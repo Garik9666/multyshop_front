@@ -8,6 +8,8 @@
           hide-delimiter-background
           delimiter-icon="mdi-minus"
           show-arrows-on-hover
+          height="100%"
+          style="max-height: 600px;"
         >
           <v-carousel-item
             v-for="(slide, i) in slides"
@@ -20,7 +22,7 @@
       </v-col>
       <v-col md="6" sm="12">
         <h2 class="text-center">{{$route.params.name}}</h2>
-        <v-col cols="8">
+        <v-col md="12" lg="12">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad ducimus expedita hic impedit in incidunt inventore ipsa, iste maxime minima necessitatibus numquam omnis quasi quos recusandae reiciendis tempora? Ab corporis impedit incidunt iure optio quam, quas repellat veritatis?
           </p>
@@ -98,14 +100,14 @@
                 class="white--text"
                 rounded
               >
-                <v-icon>mdi-cart</v-icon> Add to cart
+                <v-icon left>mdi-cart</v-icon> Cart
               </v-btn>
               <v-btn
                 color="#01235e"
                 class="white--text"
                 rounded
               >
-                <v-icon>mdi-heart</v-icon> Add to wish list
+                <v-icon left>mdi-heart</v-icon> Wish list
               </v-btn>
             </div>
           </div>

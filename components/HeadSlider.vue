@@ -1,9 +1,10 @@
 <template>
   <v-carousel
     cycle
-    height="750"
+    :height="sliderMaxWidth"
     :hide-delimiters="true"
     show-arrows-on-hover
+    v-resize="onResize"
   >
     <v-carousel-item
       v-for="(slide, i) in slides"
@@ -34,7 +35,21 @@
           {text: 'Third', src: '/slider_3.jpg', color: '#ffffff'},
           {text: 'Fourth', src: '/slider_4.jpg', color: '#ffffff'},
         ],
+        sliderMaxWidth:  750,
       }
+    },
+    mounted () {
+      this.onResize()
+    },
+    methods: {
+      onResize () {
+        if(window.innerWidth <= 960){
+          this.sliderMaxWidth = 550;
+        }else{
+          this.sliderMaxWidth = 750;
+        }
+        this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+      },
     },
   }
 </script>
