@@ -14,8 +14,8 @@
           <h1  class="text-center mb-5">New Products</h1>
           <PromoProducts :count="7"></PromoProducts>
           <v-row justify="center">
-            <v-col :cols="8">
-              <v-img src="/baner.png" max-height="640" aspect-ratio="1"></v-img>
+            <v-col lg="8" md="12">
+              <v-img src="/baner.png" cover width="100%" max-height="640" aspect-ratio="1"></v-img>
             </v-col>
           </v-row>
           <Subscribe></Subscribe>

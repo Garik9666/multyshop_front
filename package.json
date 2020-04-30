@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "awesome-phonenumber": "^2.31.0",
     "nuxt": "^2.0.0",
     "nuxt-validate": "^1.0.1",
     "swiper": "^5.3.7",

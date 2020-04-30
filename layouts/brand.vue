@@ -57,7 +57,9 @@
 
       </v-row>
       <v-spacer />
-      <v-toolbar-title class="font-weight-bold" style="color: #b20839; font-size: 35px" v-text="title" />
+      <nuxt-link to="/" style="text-decoration: none;">
+        <v-toolbar-title class="font-weight-bold" style="color: #b20839; font-size: 35px" to="/" v-text="title" />
+      </nuxt-link>
       <v-spacer />
       <v-row justify="start" class="hidden-sm-and-down" no-gutters >
 
@@ -76,12 +78,12 @@
       </v-row>
       <v-row justify="end" class="hidden-sm-and-down" no-gutters style="position: absolute; right: 0" >
         <v-badge color="error" content="6" >
-          <v-btn color="#fff" text class="my-2 nav_button" width="50px" >
+          <v-btn color="#fff" text class="my-2 nav_button" width="50px" to="/wishlist" >
             <v-icon>mdi-heart-outline</v-icon>
           </v-btn>
         </v-badge>
         <v-badge color="error" content="6" >
-          <v-btn color="#fff" text class="my-2 nav_button" width="50px" >
+          <v-btn color="#fff" text class="my-2 nav_button" width="50px" to="/cart" >
             <v-icon >mdi-cart-outline</v-icon>
           </v-btn>
         </v-badge>
@@ -265,6 +267,9 @@
   }
 </script>
 <style>
+  a{
+    text-decoration: none;
+  }
   .theme--dark.v-system-bar .v-icon {
     color: rgb(255, 255, 255);
     font-size: 24px;

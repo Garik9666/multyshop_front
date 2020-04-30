@@ -86,7 +86,9 @@
 
       </v-row>
       <v-spacer />
-      <v-toolbar-title class="font-weight-bold" style="color: #b20839; font-size: 35px" v-text="title" />
+      <nuxt-link to="/" style="text-decoration: none;">
+        <v-toolbar-title class="font-weight-bold" style="color: #b20839; font-size: 35px" to="/" v-text="title" />
+      </nuxt-link>
       <v-spacer />
       <v-row
         justify="start"
@@ -142,6 +144,7 @@
               text
               class="my-2 nav_button"
               width="50px"
+              to="/wishlist"
             >
               <v-icon>mdi-heart-outline</v-icon>
             </v-btn>
@@ -155,6 +158,7 @@
               text
               class="my-2 nav_button"
               width="50px"
+              to="/cart"
             >
               <v-icon >mdi-cart-outline</v-icon>
             </v-btn>
@@ -381,6 +385,9 @@ export default {
 }
 </script>
 <style>
+  a{
+    text-decoration: none;
+  }
   body{
     overflow-x: hidden;
   }
