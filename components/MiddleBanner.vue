@@ -1,6 +1,6 @@
 <template>
     <div  v-resize="onResize">
-      <v-container>
+      <v-container fluid>
         <v-row justify="center">
           <v-col lg="12" md="12">
             <v-row>

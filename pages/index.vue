@@ -1,23 +1,17 @@
 <template>
       <div>
         <HeadSlider></HeadSlider>
-        <v-container>
+        <v-container fluid>
         <Brands></Brands>
-        <MiddleBanner></MiddleBanner>
-<!--        <h1 class="text-center">For Mean</h1>-->
-<!--        <ProductsSlider :count="10"></ProductsSlider>-->
-<!--        <h1 class="text-center">For Woman</h1>-->
-<!--        <ProductsSlider :count="15"></ProductsSlider>-->
-
+          <h1 class="text-center">For Mean</h1>
+          <PromoProducts :count="10"></PromoProducts>
+          <h1 class="text-center">For Woman</h1>
+          <PromoProducts :count="15"></PromoProducts>
+          <MiddleBanner></MiddleBanner>
           <h1  class="text-center mb-5">Top Sales</h1>
           <PromoProducts :count="7"></PromoProducts>
           <h1  class="text-center mb-5">New Products</h1>
           <PromoProducts :count="7"></PromoProducts>
-<!--          <v-row justify="center">-->
-<!--            <v-col lg="8" md="12">-->
-<!--              <v-img src="/baner.png" cover width="100%" max-height="640" aspect-ratio="1"></v-img>-->
-<!--            </v-col>-->
-<!--          </v-row>-->
           <Subscribe></Subscribe>
 
         </v-container>
@@ -39,7 +33,7 @@ export default {
     ProductsSlider,
     PromoProducts,
     Subscribe,
-    MiddleBanner
+    MiddleBanner,
   },
   data () {
     return {

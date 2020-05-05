@@ -1,45 +1,7 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-resize="onResize"
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      :right="right"
-      fixed
-      app
-    >
-      <v-list>
-
-        <v-list-item
-
-          v-for="(item, i) in rightSide"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-content >
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item
-
-          v-for="(item, i) in leftSide"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <SystemBar></SystemBar>
-    <Menu></Menu>
+    <TopMenu></TopMenu>
     <Filters></Filters>
     <v-content>
       <nuxt />
@@ -56,14 +18,14 @@
 <script>
   import MainDividers from "../components/MainDividers";
   import  SystemBar from '../components/systemBar'
-  import Menu from '../components/menu'
+  import TopMenu from '../components/Topmenu'
   import Filters from "../components/Filters";
   export default {
     components: {
       MainDividers,
       Filters,
       SystemBar,
-      Menu
+      TopMenu
     },
     data () {
       return {
@@ -82,8 +44,6 @@
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
         checkbox: false,
-        clipped: true,
-        drawer: false,
         fixed: false,
         fav: true,
         menu: false,
@@ -120,8 +80,6 @@
           { title: 'Click Me' },
           { title: 'Click Me 2' },
         ],
-        miniVariant: false,
-        right: true,
         rightDrawer: false,
         title: 'Dalmar',
         windowSize: {
@@ -145,6 +103,9 @@
   }
 </script>
 <style>
+  .theme--dark.v-list-item--active:hover::before, .theme--dark.v-list-item--active::before{
+    opacity: 0;
+  }
   a{
     text-decoration: none;
   }

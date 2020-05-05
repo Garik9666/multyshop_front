@@ -29,11 +29,11 @@
               <v-card-text
                 v-show="hover"
                 class="pt-6"
-                style="position: absolute; bottom: 0; background-color: #b20839c9; height: 80px"
+                style="position: absolute; bottom: 0; background-color: #f39513; height: 80px"
               >
                 <v-btn
                   absolute
-                  color="#01235e"
+                  color="#ea5a21"
                   class="white--text"
                   fab
                   right
@@ -43,7 +43,7 @@
                 </v-btn>
                 <v-btn
                   absolute
-                  color="#01235e"
+                  color="#ea5a21"
                   class="white--text"
                   fab
                   top
