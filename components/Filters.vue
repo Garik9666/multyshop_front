@@ -3,8 +3,7 @@
       v-model="drawer"
       :mini-variant.sync="mini"
       fixed
-      app
-      :clipped="true"
+      app 
     >
       <v-list-item class="px-2 mt-3">
         <v-img src="/poloLogo.png" width="80%"  :contain="true"></v-img>

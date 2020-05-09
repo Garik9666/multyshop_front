@@ -1,7 +1,12 @@
 <template>
   <v-app dark>
+    <v-system-bar fixed app height="50" dark color="#ea5a21" style="justify-content: center;">
+      <v-toolbar-title>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, provident.
+      </v-toolbar-title>
+    </v-system-bar>
     <SystemBar></SystemBar>
-    <TopMenu></TopMenu>
+<!--    <TopMenu></TopMenu>-->
     <Filters></Filters>
     <v-content>
       <nuxt />
