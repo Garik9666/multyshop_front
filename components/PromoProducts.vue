@@ -14,20 +14,22 @@
         v-slot:default="{ active, toggle }"
       >
 
-        <v-hover v-slot:default="{ hover }">
+        <v-hover >
           <v-card
             color="grey lighten-4"
             class="ma-4"
             width="270"
+            height="350"
           >
             <v-img
               :aspect-ratio="16/9"
               src="https://cdn.vuetifyjs.com/images/cards/kitchen.png"
+              cover
+              height="100%"
             >
             </v-img>
             <v-slide-y-reverse-transition>
               <v-card-text
-                v-show="hover"
                 class="pt-6"
                 style="position: absolute; bottom: 0; background-color: #f39513; height: 80px"
               >

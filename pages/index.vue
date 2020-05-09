@@ -1,13 +1,15 @@
 <template>
       <div>
-        <HeadSlider></HeadSlider>
         <v-container fluid>
         <Brands></Brands>
+        </v-container>
+        <HeadSlider></HeadSlider>
+        <v-container fluid>
           <h1 class="text-center">For Mean</h1>
           <PromoProducts :count="10"></PromoProducts>
           <h1 class="text-center">For Woman</h1>
           <PromoProducts :count="15"></PromoProducts>
-          <MiddleBanner></MiddleBanner>
+<!--          <MiddleBanner></MiddleBanner>-->
           <h1  class="text-center mb-5">Top Sales</h1>
           <PromoProducts :count="7"></PromoProducts>
           <h1  class="text-center mb-5">New Products</h1>

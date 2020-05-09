@@ -1,16 +1,23 @@
 <template>
-  <v-app dark>
-    <SystemBar></SystemBar>
-    <TopMenu></TopMenu>
-    <v-content>
+  <div>
+    <div style="width: 100%;color: #fff; text-align: center; padding: 10px; background-color: #ea5a21">
+      <v-toolbar-title>
+        Mother's Day Shop: Gifts she'll love!
+      </v-toolbar-title>
+    </div>
+    <v-app dark>
+      <SystemBar></SystemBar>
+      <TopMenu></TopMenu>
+      <v-content id="main">
         <nuxt />
-    </v-content>
-    <MainDividers></MainDividers>
-    <v-footer
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
-  </v-app>
+      </v-content>
+      <MainDividers></MainDividers>
+      <v-footer
+      >
+        <span>&copy; {{ new Date().getFullYear() }}</span>
+      </v-footer>
+    </v-app>
+  </div>
 </template>
 
 <script>
