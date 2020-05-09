@@ -1,34 +1,28 @@
-<template>
-  <div>
-<!--    <div style="width: 100%;color: #fff; text-align: center; padding: 10px; background-color: #ea5a21">-->
-<!--      <v-toolbar-title>-->
-<!--        Mother's Day Shop: Gifts she'll love!-->
-<!--      </v-toolbar-title>-->
-<!--    </div>-->
+<template id="main">
     <v-app dark>
+      <v-system-bar fixed app height="50" dark color="#ea5a21" style="justify-content: center;">
+        <v-toolbar-title>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, provident.
+        </v-toolbar-title>
+      </v-system-bar>
       <SystemBar></SystemBar>
-      <TopMenu></TopMenu>
-      <v-content id="main">
+      <v-content>
         <nuxt />
       </v-content>
       <MainDividers></MainDividers>
-      <v-footer
-      >
+      <v-footer>
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>
     </v-app>
-  </div>
 </template>
 
 <script>
   import MainDividers from "../components/MainDividers";
   import SystemBar from '../components/systemBar'
-  import TopMenu from '../components/Topmenu';
 export default {
   components: {
     MainDividers,
-    SystemBar,
-    TopMenu
+    SystemBar
   },
   data () {
     return {

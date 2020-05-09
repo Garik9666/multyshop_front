@@ -11,13 +11,13 @@
     </v-navigation-drawer>
     <v-app-bar :absolute="menuAbsolute" height="auto"  app :clipped-left="clipped"  color="#ea5a21" light v-scroll="handleScroll">
       <v-row justify="center">
-        <v-col lg="8" md="12">
+        <v-col lg="8" md="12" class="pa-0">
           <v-row justify="space-around">
-            <v-col lg="4" md="6">
-              <v-text-field filled rounded dense color="#ea5a21" background-color="#fff" dense label="Search" prepend-inner-icon="mdi-magnify" style="max-height: 50px;" ></v-text-field>
+            <v-col lg="4" md="6" class="pa-0">
+              <v-text-field filled rounded dense color="#ea5a21" background-color="#fff" label="Search" prepend-inner-icon="mdi-magnify" style="max-height: 50px;" ></v-text-field>
             </v-col>
             <v-divider vertical dark></v-divider>
-            <v-col lg="4" md="5">
+            <v-col lg="4" md="5" class="pa-0">
               <v-img max-width="300" width="100%" src="/nickeBaner.png" contain></v-img>
             </v-col>
           </v-row>
