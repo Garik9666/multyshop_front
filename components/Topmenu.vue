@@ -9,9 +9,21 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :absolute="menuAbsolute"  app :clipped-left="clipped"  color="#ea5a21" dark v-scroll="handleScroll">
-      <v-text-field filled rounded dense label="Search" prepend-inner-icon="mdi-magnify" style="max-height: 50px;" ></v-text-field>
-      <v-app-bar-nav-icon class="hidden-md-and-up" @click.stop="drawer = !drawer" />
+    <v-app-bar :absolute="menuAbsolute" height="auto"  app :clipped-left="clipped"  color="#ea5a21" light v-scroll="handleScroll">
+      <v-row justify="center">
+        <v-col lg="8" md="12">
+          <v-row justify="space-around">
+            <v-col lg="4" md="6">
+              <v-text-field filled rounded dense color="#ea5a21" background-color="#fff" dense label="Search" prepend-inner-icon="mdi-magnify" style="max-height: 50px;" ></v-text-field>
+            </v-col>
+            <v-divider vertical dark></v-divider>
+            <v-col lg="4" md="5">
+              <v-img max-width="300" width="100%" src="/nickeBaner.png" contain></v-img>
+            </v-col>
+          </v-row>
+<!--          <v-app-bar-nav-icon class="hidden-md-and-up" @click.stop="drawer = !drawer" />-->
+        </v-col>
+      </v-row>
     </v-app-bar>
   </div>
 </template>
@@ -25,7 +37,7 @@
           left: true,
           miniVariant: false,
           drawer: false,
-          menuAbsolute: true,
+          menuAbsolute: false,
 
           leftSide: [
             { title: 'Brands',
@@ -178,7 +190,7 @@
           if(event.target.scrollingElement.scrollTop > 10){
             this.menuAbsolute = false
           }else if(event.target.scrollingElement.scrollTop < 51){
-            this.menuAbsolute = true
+            // this.menuAbsolute = true
           }
         },
         onResize () {

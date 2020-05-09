@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div style="width: 100%;color: #fff; text-align: center; padding: 10px; background-color: #ea5a21">
-      <v-toolbar-title>
-        Mother's Day Shop: Gifts she'll love!
-      </v-toolbar-title>
-    </div>
+<!--    <div style="width: 100%;color: #fff; text-align: center; padding: 10px; background-color: #ea5a21">-->
+<!--      <v-toolbar-title>-->
+<!--        Mother's Day Shop: Gifts she'll love!-->
+<!--      </v-toolbar-title>-->
+<!--    </div>-->
     <v-app dark>
       <SystemBar></SystemBar>
       <TopMenu></TopMenu>

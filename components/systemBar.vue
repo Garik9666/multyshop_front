@@ -9,16 +9,23 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-system-bar :absolute="menuAbsolute" app height="140" color="#fff"style="justify-content: center" id="create" v-scroll="handleScroll" >
+    <v-system-bar :absolute="menuAbsolute" app height="200" color="#fff" style="justify-content: center" id="create" v-scroll="handleScroll" >
       <v-col lg="8" md="12">
         <v-row align="center" style="position: relative">
-          <v-col md="2" sm="5" class="text-center">
+          <v-col md="2" sm="4" cols="4" class="text-center pa-0">
             <nuxt-link :to="localePath('/')" style="text-decoration: none;">
-              <v-toolbar-title class="font-weight-bold" style="color: #b20839; font-size: 35px" v-text="" > ArmMall </v-toolbar-title>
+              <v-img src="/armmallLogo.png" max-height="120"  cover></v-img>
+<!--              <v-toolbar-title class="font-weight-bold" style="color: #b20839; font-size: 35px" v-text="" > ArmMall </v-toolbar-title>-->
             </nuxt-link>
           </v-col>
-
-          <v-row justify="end" class="hidden-md-and-down" no-gutters style="position: absolute; right: 0" id="dropdown-language">
+          <v-col md="4" sm="3" class="text-center pa-0 hidden-sm-and-down">
+            <a class="W" href="/c/shipping-and-returns">
+              <p><span class="X">Free shipping </span><span class="">any 2+ items or $50+! </span>  <span class="Y">See Details</span></p></a>
+          </v-col>
+          <v-col class="hidden-sm-and-down">
+            <div class="p"><div class="q"><div><a class="t" href="tel:8886762660">1.888.676.2660</a><div class="u">8AM-5PM PST MON-FRI</div></div></div><a class="r" href="https://www.6pm.com/tng/chat.zml"></a></div>
+          </v-col>
+          <v-row justify="end" class="hidden-sm-and-down" no-gutters style="position: absolute; right: 0" id="dropdown-language">
             <v-badge color="error" content="6" >
               <v-btn :to="localePath('/wishlist')" color="#fff" text class="my-2 nav_button" width="50px" >
                 <v-icon>mdi-heart-outline</v-icon>
@@ -235,7 +242,7 @@
             top: false,
             bottom: true,
             left: false,
-            menuAbsolute: true,
+            menuAbsolute: false,
             transition: 'slide-y-reverse-transition',
             registerForm: {
               name: '',
@@ -418,7 +425,7 @@
           if(event.target.scrollingElement.scrollTop > 10){
             this.menuAbsolute = false
           }else if(event.target.scrollingElement.scrollTop < 51){
-            this.menuAbsolute = true
+            // this.menuAbsolute = true
           }
         },
         onResize () {
