@@ -1,13 +1,15 @@
 <template>
-    <div>
+    <v-container>
       <p>
         dashboard
       </p>
-    </div>
+    </v-container>
 </template>
 
 <script>
     export default {
+      layout: 'dashboard',
+        middleware: 'admin',
         name: "index"
     }
 </script>
