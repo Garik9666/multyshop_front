@@ -97,7 +97,7 @@ export default {
         },
       ],
       langDir: 'lang/',
-      defaultLocale: 'am',
+      defaultLocale: 'en',
     }]
   ],
   /*
