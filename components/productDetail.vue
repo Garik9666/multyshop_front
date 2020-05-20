@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <v-row>
       <v-col md="6" sm="12">
         <v-carousel
@@ -12,19 +12,19 @@
           style="max-height: 600px;"
         >
           <v-carousel-item
-            v-for="(slide, i) in slides"
+            v-for="(slide, i) in JSON.parse(product.images)"
             :key="i"
-            :src="slide.image"
+            :src="slide"
             top
           >
           </v-carousel-item>
         </v-carousel>
       </v-col>
       <v-col md="6" sm="12">
-        <h2 class="text-center">{{$route.params.name}}</h2>
+        <h2 class="text-center">{{product.name}}</h2>
         <v-col md="12" lg="12">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad ducimus expedita hic impedit in incidunt inventore ipsa, iste maxime minima necessitatibus numquam omnis quasi quos recusandae reiciendis tempora? Ab corporis impedit incidunt iure optio quam, quas repellat veritatis?
+            {{product.description}}
           </p>
           <div class="mt-5">
             <p class="ma-0">Colors</p>
@@ -88,22 +88,22 @@
           <div class="pl-0">
             <p class="ma-0">
               <span>
-                Price: 15.000 AMD
+                Price: {{product.price}} AMD
               </span>
             </p>
           </div>
           <div class="mt-5 pl-0">
             <div class="text-left">
-              <v-btn  color="#01235e" rounded dark>Buy</v-btn>
+              <v-btn  color="#e60000" rounded dark>Buy</v-btn>
               <v-btn
-                color="#01235e"
+                color="#ea5a21"
                 class="white--text"
                 rounded
               >
                 <v-icon left>mdi-cart</v-icon> Cart
               </v-btn>
               <v-btn
-                color="#01235e"
+                color="#ff0057"
                 class="white--text"
                 rounded
               >
@@ -122,23 +122,22 @@
   export default {
     data () {
       return {
-        colors: [
-          'green',
-          'secondary',
-          'yellow darken-4',
-          'red lighten-2',
-          'orange darken-1',
-        ],
-        productColors: ['#dbdbdb', 'Green', 'Black', 'Red'],
-        productSizes: ['S', 'M', 'XS', 'L'],
+        productColors: [],
+        productSizes: [],
         cycle: false,
-        slides: [
-          {text: 'First', image: '/jins1.jpg' },
-          {text: 'Second', image: '/jins3.jpg' },
-          {text: 'Third', image: '/jins1.jpg' },
-          {text: 'Fourth', image: '/jins3.jpg' },
-          {text: 'Fifth', image: '/jins1.jpg' },
-        ],
+      }
+    },
+    mounted() {
+      this.product.product_color.forEach(elem => {
+        this.productColors.push(elem.color)
+      });
+      this.product.product_size.forEach(elem => {
+        this.productSizes.push(elem.name)
+      });
+    },
+    computed: {
+      product() {
+        return this.$store.getters['products/product'];
       }
     },
   }

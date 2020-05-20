@@ -5,17 +5,17 @@
   >
     <v-row justify="center">
       <v-card
-        v-for="(slide, i) in slides"
+        v-for="(brand, i) in brands"
         :key="i"
-        :color="slide.color"
+        :color="brand.color"
         class="ma-4"
         height="300"
         width="10%"
         min-width="300"
-        to="/brand/polo"
+        :to="`/brand/${brand.id}?page=1`"
       >
         <v-img
-          :src="slide.src"
+          :src="brand.image"
           height="300"
           :contain="true"
         >
@@ -33,15 +33,20 @@
       slides: [
         {text: 'US Polo', src: '/uspolo.jpg', color: '#ffffff'},
         {text: 'Second', src: '/giordano.jpg', color: '#000000'},
-        {text: 'US Polo', src: '/uspolo.jpg', color: '#ffffff'},
-        {text: 'Second', src: '/giordano.jpg', color: '#000000'},
-        {text: 'US Polo', src: '/uspolo.jpg', color: '#ffffff'},
-        {text: 'Second', src: '/giordano.jpg', color: '#000000'},
-        {text: 'US Polo', src: '/uspolo.jpg', color: '#ffffff'},
-        {text: 'Second', src: '/giordano.jpg', color: '#000000'},
-        {text: 'US Polo', src: '/uspolo.jpg', color: '#ffffff'},
-        {text: 'Second', src: '/giordano.jpg', color: '#000000'}
+        {text: 'US Polo', src: '/baldi.png', color: '#ffffff'},
+        {text: 'Second', src: '/gap.png', color: '#000000'},
+        {text: 'US Polo', src: '/masimo.jpg', color: '#ffffff'},
+        {text: 'Second', src: '/megasport.png', color: '#000000'},
+        {text: 'US Polo', src: '/roberto.jpg', color: '#ffffff'},
+        {text: 'Second', src: '/stradivarius.png', color: '#000000'},
+        {text: 'US Polo', src: '/time.png', color: '#ffffff'},
+        {text: 'Second', src: '/zara.jpg', color: '#000000'}
       ],
     }),
+    computed: {
+      brands() {
+        return this.$store.getters['brands/brands'];
+      }
+    },
   }
 </script>

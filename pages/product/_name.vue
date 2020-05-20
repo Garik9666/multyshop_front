@@ -2,8 +2,9 @@
   <div>
     <productDetail></productDetail>
     <h2 class="text-center">Related Products</h2>
-    <PromoProducts :count="7"></PromoProducts>
-    <deliveryBaner></deliveryBaner>
+    <PromoProducts :count="7" type="best"></PromoProducts>
+    <div style="width:400px">
+    </div>
     <Subscribe></Subscribe>
   </div>
 </template>
@@ -15,6 +16,10 @@ import Subscribe from '~/components/Subscribe.vue'
 
 export default {
     layout: 'product',
+  async fetch({route, store}) {
+    await store.dispatch('products/filterAsType', ['best']);
+    await store.dispatch('products/getProduct', [route.params.name]);
+  },
   components: {
     productDetail,
     PromoProducts,

@@ -6,7 +6,7 @@
       app
     >
       <v-list-item class="px-2 mt-3">
-        <v-img src="/poloLogo.png" width="80%"  :contain="true"></v-img>
+        <v-img :src="brand[0].image" width="80%"  :contain="true"></v-img>
 
 <!--        <v-list-item-title>John Leider</v-list-item-title>-->
 
@@ -91,5 +91,10 @@
         mini: false,
       }
     },
+    computed: {
+      brand() {
+        return this.$store.getters['brands/brand'];
+      },
+    }
   }
 </script>

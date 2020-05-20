@@ -8,7 +8,7 @@
     >
       <v-list-item class="px-2 mt-3">
 
-        <v-list-item-title class="display-1 font-weight-bold">DavMar</v-list-item-title>
+        <v-list-item-title class="display-1 font-weight-bold">ArmMall</v-list-item-title>
         <v-btn icon @click.stop="mini = !mini" >
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>

@@ -38,7 +38,7 @@ export default {
     '~/node_modules/vee-validate',
     './plugins/mixins/validation',
     './plugins/mixins/user',
-    './plugins/axios'
+    './plugins/axios',
   ],
   auth: {
     strategies: {

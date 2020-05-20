@@ -5,7 +5,7 @@
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, provident.
         </v-toolbar-title>
       </v-system-bar>
-      <SystemBar></SystemBar>
+      <SystemBar :header="10"></SystemBar>
 <!--      <TopMenu></TopMenu>-->
       <v-content>
         <nuxt />

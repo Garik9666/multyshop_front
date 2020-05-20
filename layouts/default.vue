@@ -1,9 +1,6 @@
 <template id="main">
     <v-app dark>
-      <v-system-bar fixed app height="30" dark color="#ea5a21" style="justify-content: center;">
-        <v-toolbar-title>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, provident.
-        </v-toolbar-title>
+      <v-system-bar fixed app height="5" dark color="#ea5a21" style="justify-content: center;">
       </v-system-bar>
       <SystemBar></SystemBar>
       <v-content>
@@ -20,6 +17,7 @@
   import MainDividers from "../components/MainDividers";
   import SystemBar from '../components/systemBar'
 export default {
+    name: 'default',
   components: {
     MainDividers,
     SystemBar

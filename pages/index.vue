@@ -5,15 +5,13 @@
         </v-container>
         <HeadSlider></HeadSlider>
         <v-container fluid>
-          <h1 class="text-center">For Mean</h1>
-          <PromoProducts :count="10"></PromoProducts>
-          <h1 class="text-center">For Woman</h1>
-          <PromoProducts :count="15"></PromoProducts>
 <!--          <MiddleBanner></MiddleBanner>-->
-          <h1  class="text-center mb-5">Top Sales</h1>
-          <PromoProducts :count="7"></PromoProducts>
           <h1  class="text-center mb-5">New Products</h1>
-          <PromoProducts :count="7"></PromoProducts>
+          <PromoProducts :count="7" type="new" ></PromoProducts>
+          <h1  class="text-center mb-5">Best selling</h1>
+          <PromoProducts :count="7" type="best" ></PromoProducts>
+          <h1  class="text-center mb-5">Sales</h1>
+          <PromoProducts :count="7" type="sales" ></PromoProducts>
           <Subscribe></Subscribe>
 
         </v-container>
@@ -29,6 +27,12 @@ import Subscribe from '~/components/Subscribe.vue'
 import MiddleBanner from "../components/MiddleBanner";
 
 export default {
+  async fetch({store}){
+    await store.dispatch('brands/fetch');
+    await store.dispatch('products/filterAsType', ['new']);
+    await store.dispatch('products/filterAsType', ['best']);
+    await store.dispatch('products/filterAsType', ['sales']);
+  },
   components: {
     HeadSlider,
     Brands,
@@ -41,6 +45,7 @@ export default {
     return {
       justifyCenter: 'center',
     }
-  }
+  },
+
 }
 </script>

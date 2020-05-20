@@ -1,60 +1,26 @@
 <template>
-  <v-sheet
-    class="mx-auto"
-  >
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      center-active
-      :show-arrows="false"
-    >
-      <v-slide-item
-        v-for="n in count"
-        :key="n"
-        v-slot:default="{ active, toggle }"
-      >
-
+  <v-sheet class="mx-auto" >
+    <v-slide-group v-model="model" class="pa-4" center-active :show-arrows="false" >
+<!--      {{products}}-->
+      <v-slide-item v-for="(product, n) in products" :key="n" v-slot:default="{ active, toggle }" >
         <v-hover >
-          <v-card
-            color="grey lighten-4"
-            class="ma-4"
-            width="270"
-            height="350"
-          >
-            <v-img
-              :aspect-ratio="16/9"
-              src="https://cdn.vuetifyjs.com/images/cards/kitchen.png"
-              cover
-              height="100%"
-            >
-            </v-img>
+          <v-card color="grey lighten-4" class="ma-4" width="270" height="350" >
+            <nuxt-link :to="`/product/${product.id}`">
+              <v-img :aspect-ratio="16/9" :src="JSON.parse(product.images)[0]" cover height="100%" >
+              </v-img>
+            </nuxt-link>
             <v-slide-y-reverse-transition>
-              <v-card-text
-                class="pt-6"
-                style="position: absolute; bottom: 0; background-color: #f39513; height: 80px"
-              >
-                <v-btn
-                  absolute
-                  color="#ea5a21"
-                  class="white--text"
-                  fab
-                  right
-                  top
-                >
+              <v-card-text class="pt-6" style="position: absolute; bottom: 0; background-color: #f39513; height: 80px" >
+                <v-btn absolute color="#ea5a21" class="white--text" fab right top >
                   <v-icon>mdi-cart</v-icon>
                 </v-btn>
-                <v-btn
-                  absolute
-                  color="#ea5a21"
-                  class="white--text"
-                  fab
-                  top
-                  style="right: 90px"
-                >
+                <v-btn absolute color="#ff0057" class="white--text" fab top style="right: 90px" >
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
-                <h3 class=" font-weight-light font-weight-bold white--text mb-2">QW cooking utensils</h3>
-                <p class="price white--text"><span class="font-weight-bold">Price</span> 15.000 AMD</p>
+                <nuxt-link :to="`/product/${product.id}`">
+                  <h3 class="font-weight-light font-weight-bold white--text mb-2">{{product.name}}</h3>
+                  <p class="price white--text"><span class="font-weight-bold">Price</span> {{product.price}} AMD</p>
+                </nuxt-link>
               </v-card-text>
             </v-slide-y-reverse-transition>
           </v-card>
@@ -66,10 +32,22 @@
 
 <script>
   export default {
-    props: ['count'],
+    props: ['count', 'type'],
+    name: 'promoProductComponent',
     data: () => ({
       model: null,
     }),
+    computed: {
+      products() {
+        if(this.type === 'new'){
+          return this.$store.getters['products/newProducts'];
+        }else if(this.type === 'best'){
+          return this.$store.getters['products/bestProducts'];
+        }else if(this.type === 'sales'){
+          return this.$store.getters['products/salesProducts'];
+        }
+      },
+    }
   }
 </script>
 

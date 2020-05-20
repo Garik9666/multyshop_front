@@ -10,7 +10,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :height="headerHeight"  color="#fff" style="justify-content: center; flex-wrap: wrap;" id="create" app>
-            <v-col lg="8" md="12" class="py-0">
+            <v-col :lg="9" md="12" class="py-0">
               <v-row align="center" justify="space-between" style="position: relative">
                 <v-col md="2" sm="3" cols="5" class="text-center py-0">
                   <nuxt-link :to="localePath('/')" style="text-decoration: none;">
@@ -18,15 +18,14 @@
                   </nuxt-link>
                 </v-col>
                 <v-col md="2" sm="2" class="text-center hidden-sm-and-down">
-                  <nuxt-link :to="localePath('/')" style="text-decoration: none;">
-                    <p>Free shipping any 2+ items or $50+ !See Details</p>
-                  </nuxt-link>
+<!--                  <nuxt-link :to="localePath('/')" style="text-decoration: none;">-->
+<!--                    <p>Free shipping any 2+ items or $50+ !See Details</p>-->
+<!--                  </nuxt-link>-->
                 </v-col>
                 <v-col md="2" sm="2" class="hidden-sm-and-down text-center">
                     <div class="q">
                       <div>
-                        <a class="t" href="tel:8886762660">+374 41 96 96 20</a>
-                        <div class="u">8AM-5PM PST MON-FRI</div>
+                        <a class="phoneNumber"  href="tel:+37443220110">TEL: +374 43 220 110</a>
                       </div>
                     </div>
                 </v-col>
@@ -70,7 +69,6 @@
                                   <v-text-field v-model="loginForm.email" :rules="emailRules" label="E-mail" required ></v-text-field>
                                   <v-text-field v-model="loginForm.password" :rules="passwordRules" label="Password" required ></v-text-field>
 
-                                  <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required ></v-checkbox>
                                   <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn color="primary" text @click="loginAction">Login</v-btn>
@@ -94,7 +92,7 @@
                                   <v-text-field v-model="registerForm.email" :rules="emailRules" label="E-mail" required ></v-text-field>
                                   <v-text-field v-model="registerForm.password" :rules="passwordRules" label="Password" required ></v-text-field>
                                   <v-text-field v-model="registerForm.password_confirmation" :rules="passwordConfirmation" label="Password" required ></v-text-field>
-                                  <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required ></v-checkbox>
+                                  <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree with conditions?" required ></v-checkbox>
                                   <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn color="primary" text @click="registerAction">Register</v-btn>
@@ -130,48 +128,30 @@
                   <v-app-bar-nav-icon  style="" @click.stop="drawer = !drawer" />
                 </v-col>
               </v-row>
-              <v-row>
-                <v-col cols="5" class="pa-0">
+              <v-row justify="center">
+                <v-col cols="3" class="pa-0">
                   <v-row justify="end" class="hidden-sm-and-down" no-gutters >
                     <v-menu :open-on-hover="true" bottom offset-y v-for="(item, i) in leftSide" dark :key="i">
                       <template v-slot:activator="{ on }">
-                        <v-btn exact :to="localePath(item.to)" router color="#000" text class="nav_button" v-on="on" bottom >
+                        <v-btn exact :to="localePath(item.to)" router color="#df1f25" style="font-size: 18px; font-weight: 600" text class="nav_button" v-on="on" bottom >
                           {{item.title}}
                         </v-btn>
                       </template>
-                      <v-list v-if="item.items" style="background-color: #ea5a21">
+                      <v-list v-if="item.items"  style="background-color: #ea5a21;">
                         <v-list-item-content style="align-items: normal">
-                          <v-list-item-group v-if="item.items" v-for="(item, index) in item.items" :key="index">
-                            <v-list-item style="text-align: center;" exact :to="localePath(item.to)">
-                              <v-list-item-title>
-                                {{ item.title }}
-                              </v-list-item-title>
-                            </v-list-item>
-                            <v-divider style="background-color: #fff"></v-divider>
-                            <v-list-item-content class="">
-                              <v-list-item-group style="max-width: 150px;" v-if="item.items" v-for="(item, index) in item.items" :key="index">
-                                <v-list-item style="text-align: center;" exact :to="localePath(item.to)">
+
+                          <v-list-item-group v-if="item.items" style="max-width: 350px;">
+                            <v-list-item v-for="(item, index) in item.items" :key="index" style="text-align: center;" exact :to="localePath(item.to)">
+                              <v-list-item-content class="">
+                                <v-list-item-group >
                                   <v-list-item-title>
                                     {{ item.title }}
                                   </v-list-item-title>
-                                </v-list-item>
-                                <v-list-item-content class="mainDivide">
-                                  <v-list-item-group style="max-width: 150px;" v-if="item.items" v-for="(item, index) in item.items" :key="index" exact :to="localePath(item.to)">
-                                    <v-list-item-title style="text-align: center;">{{ item.title }}</v-list-item-title>
-                                  </v-list-item-group>
-                                  <v-list-item v-else exact :to="localePath(item.to)">
-                                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                                  </v-list-item>
-                                </v-list-item-content>
-                              </v-list-item-group>
-                              <v-list-item v-else exact :to="localePath(item.to)">
-                                <v-list-item-title>{{ item.title }}</v-list-item-title>
-                              </v-list-item>
-                            </v-list-item-content>
+                                </v-list-item-group>
+                              </v-list-item-content>
+                            </v-list-item>
                           </v-list-item-group>
-                          <v-list-item v-else exact :to="localePath(item.to)">
-                            <v-list-item-title>{{ item.title }}</v-list-item-title>
-                          </v-list-item>
+
                           <v-list-item-group>
                             <v-list-item disabled>
                               <v-img src="/men.jpg" max-width="250" min-height="400" cover></v-img>
@@ -182,12 +162,12 @@
                     </v-menu>
                   </v-row>
                 </v-col>
-                <v-col cols="5" class="pa-0">
+                <v-col cols="8" class="pa-0">
                   <v-row justify="start" class="hidden-sm-and-down" no-gutters >
 
                     <v-menu :open-on-hover="true" bottom offset-y v-for="(item, i) in rightSide" dark :key="i">
                       <template v-slot:activator="{ on }">
-                        <v-btn exact :to="localePath(item.to)" router color="#000" text class="nav_button" v-on="on" bottom >
+                        <v-btn exact :to="localePath(item.to)" router color="#df1f25" style="font-size: 18px; font-weight: 600" text class="nav_button" v-on="on" bottom >
                           {{item.title}}
                         </v-btn>
                       </template>
@@ -251,7 +231,12 @@
 </template>
 
 <script>
+
     export default {
+      props: ['header'],
+      async fetch({store}) {
+        await store.dispatch('brands/fetch')
+      },
       data () {
           return {
             registrationError: false,
@@ -298,7 +283,7 @@
             valid: true,
             checkbox: false,
             menu: false,
-            MainLanguage: "armenian",
+            MainLanguage: "english",
             languages: [
               { text: 'armenian', to: 'am', icon: '/arm.png', callback: () => console.log('list') },
               { text: 'russian', to: 'ru', icon: '/rus.png', callback: () => console.log('favorite') },
@@ -308,65 +293,7 @@
               { title: 'Brands',
                 to: '/',
                 items: [
-                  { title: 'Polo',
-                    to: '/brand/polo',
-                    items: [
-                      {
-                        title: 'For Men',
-                        to: '/brand/polo',
-                        items: [
-                          {title: 'Shoes', to: '/'},
-                          {title: 'Clothing', to: '/'},
-                          {title: 'Bags', to: '/'},
-                          {title: 'Eyewear', to: '/'},
-                          {title: 'Watches', to: '/'},
-                        ],
-                      },
-                      {
-                        title: 'For Women',
-                        to: '/brand/polo',
-                        items: [
-                          {title: 'Shoes', to: '/'},
-                          {title: 'Clothing', to: '/'},
-                          {title: 'Bags', to: '/'},
-                          {title: 'Eyewear', to: '/'},
-                          {title: 'Watches', to: '/'},
-                        ],
-                      }
-                    ],
-                  },
-                  { title: 'Giordano',
-                    to: '/brand/Giordano',
-                    items: [
-                      {
-                        title: 'For Men',
-                        to: '/brand/polo',
-                        items: [
-                          {title: 'Shoes', to: '/'},
-                          {title: 'Clothing', to: '/'},
-                          {title: 'Bags', to: '/'},
-                          {title: 'Eyewear', to: '/'},
-                          {title: 'Watches', to: '/'},
-                        ],
-                      }
-                    ],
-                  },
-                  { title: 'Giordano',
-                    to: '/brand/Giordano',
-                    items: [
-                      {
-                        title: 'For Women',
-                        to: '/brand/polo',
-                        items: [
-                          {title: 'Shoes', to: '/'},
-                          {title: 'Clothing', to: '/'},
-                          {title: 'Bags', to: '/'},
-                          {title: 'Eyewear', to: '/'},
-                          {title: 'Watches', to: '/'},
-                        ],
-                      }
-                    ],
-                  },
+
                 ],
               },
               { title: 'Sales',
@@ -433,14 +360,35 @@
                 ],
               },
               {
-                title: 'Contact Us',
+                title: 'Delivery conditions',
+                to: '/'
+              },
+              {
+                title: 'About us',
+                to: '/'
+              },
+              {
+                title: 'Contact',
                 to: '/'
               }
             ],
           }
       },
+      computed: {
+        brands() {
+          return this.$store.getters['brands/brands'];
+        }
+      },
       mounted () {
-        this.onResize()
+        this.onResize();
+        console.log(this.brands)
+        this.brands.forEach(elem => {
+          this.leftSide[0].items.push(
+            { title: elem.name,
+              to: '/brand/'+elem.id,
+            }
+          )
+        })
       },
 
       methods: {
@@ -459,7 +407,7 @@
         },
        async registerAction() {
 
-         await this.$axios.post('http://localhost:8000/api/auth/register', this.registerForm).then(response => {
+         await this.$axios.post('http://apidavmar.neoteric-software.com/api/auth/register', this.registerForm).then(response => {
            this.menu = false;
            this.$auth.login({data: this.registerForm});
          }).catch(e => {
@@ -512,5 +460,16 @@
     padding: 0;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .phoneNumber{
+    font-size: 18px;
+    font-weight: 600;
+    color: #ea5a21 !important;
+  }
+  .theme--dark.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+    color: #FFFFFF !important;
+    display: block;
+    width: 145px;
+    float: left;
   }
 </style>

@@ -10,6 +10,9 @@
           <v-col cols="5" class="pl-0">
             <v-text-field type="number" v-model="order" :counter="10" :rules="nameRules" label="Order" required ></v-text-field>
           </v-col>
+          <v-col cols="5" class="pl-0">
+            <v-color-picker v-model="color"></v-color-picker>
+          </v-col>
           <v-row>
             <v-col v-if="selectedImages !== ''" class=" d-flex child-flex" cols="3" >
               <v-hover v-slot:default="{ hover }">
@@ -109,6 +112,7 @@
           dialog: false,
           uploadDialog: false,
           selectedImages: '',
+          color: '',
           nameRules: [
             v => !!v || 'Field is required',
           ],
@@ -135,7 +139,7 @@
           let data = new FormData();
           data.append('name', this.imageName);
           data.append('image', this.files);
-          this.$axios.$post('http://localhost:8000/api/multimedia/upload', data).then(
+          this.$axios.$post('http://apidavmar.neoteric-software.com/api/multimedia/upload', data).then(
             response => {
               this.files = []
               this.$store.dispatch('multimedia/fetch')
@@ -145,7 +149,7 @@
           })
         },
         addBrand() {
-          this.$store.dispatch('brands/addBrand', [this.name, this.order, this.selectedImages]).then(r => {
+          this.$store.dispatch('brands/addBrand', [this.name, this.order, this.selectedImages, this.color]).then(r => {
             this.$router.push('/dashboard/brands')
           })
         }

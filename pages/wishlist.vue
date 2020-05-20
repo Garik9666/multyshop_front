@@ -2,39 +2,19 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-                  <v-data-table
-                    :headers="headers"
-                    :items="desserts"
-                    hide-default-footer
-                    class="elevation-1"
-                  >
+                  <v-data-table :headers="headers" :items="desserts" hide-default-footer class="elevation-1" >
                     <template v-slot:item.image="{ item }">
-                      <v-img
-                        :src="item.image"
-                        :contain="true"
-                        width="100"
-                        height="100"
-                      ></v-img>
+                      <v-img :src="item.image" :contain="true" width="100" height="100" ></v-img>
                     </template>
                     <template v-slot:item.count="{ item }">
-                      <v-text-field
-                        type="number"
-                        placeholder="0"
-                        v-model="item.count"
-                        style="max-width: 60px; margin: 0 auto !important; text-align: center"
-                        min="1"
-                      ></v-text-field>
+                      <v-text-field type="number" placeholder="0" v-model="item.count" style="max-width: 60px; margin: 0 auto !important; text-align: center" min="1" ></v-text-field>
                     </template>
                     <template v-slot:item.color="{ item }">
-                      <v-card
-                        :color="item.color.toLowerCase()"
-                        class="d-flex text-center align-center mx-3"
-                        dark
-                        height="30"
-                        width="30"
-                        style="margin: 0 auto !important;"
-                      >
+                      <v-card :color="item.color.toLowerCase()" class="d-flex text-center align-center mx-3" dark height="30" width="30" style="margin: 0 auto !important;" >
                       </v-card>
+                    </template>
+                    <template v-slot:item.addToCart="{ item }">
+                      <v-icon  @click.stop="">mdi-cart-outline</v-icon>
                     </template>
                     <template v-slot:item.remove="{ item }">
                       <v-icon  @click="deleteItem(item)">mdi-delete</v-icon>
@@ -58,6 +38,7 @@
               { text: 'Color', value: 'color',  sortable: false,  align: 'center', },
               { text: 'Count', value: 'count',  sortable: false,  align: 'center', },
               { text: 'Price', value: 'price',  sortable: false,  align: 'center', },
+              { text: 'Add to cart', value: 'addToCart',  sortable: false,  align: 'center', },
               { text: 'Remove', value: 'remove',  sortable: false,  align: 'center', },
             ],
             desserts: [
@@ -68,6 +49,7 @@
                 color: 'Blue',
                 count: 1,
                 price: 15000,
+                addToCart: 'mdi-cart-outline',
                 remove: 'mdi-delete',
               },
               {
@@ -77,6 +59,7 @@
                 color: 'Black',
                 count: 1,
                 price: 16000,
+                addToCart: 'mdi-cart-outline',
                 remove: 'mdi-delete',
               },
               {
@@ -86,6 +69,7 @@
                 color: 'Black',
                 count: 5,
                 price: 16000,
+                addToCart: 'mdi-cart-outline',
                 remove: 'mdi-delete',
               },
               {
@@ -95,6 +79,7 @@
                 color: 'Black',
                 count: 1,
                 price: 16000,
+                addToCart: 'mdi-cart-outline',
                 remove: 'mdi-delete',
               },
               {
@@ -104,6 +89,7 @@
                 color: 'Black',
                 count: 1,
                 price: 16000,
+                addToCart: 'mdi-cart-outline',
                 remove: 'mdi-delete',
               }
             ],
