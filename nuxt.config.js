@@ -39,6 +39,10 @@ export default {
     './plugins/mixins/validation',
     './plugins/mixins/user',
     './plugins/axios',
+    {
+      src: './plugins/GoogleAnalytics.js',
+      mode: 'client'
+    }
   ],
   auth: {
     strategies: {
@@ -98,7 +102,8 @@ export default {
       ],
       langDir: 'lang/',
       defaultLocale: 'en',
-    }]
+    }],
+    'cookie-universal-nuxt',
   ],
   /*
   ** Axios module configuration

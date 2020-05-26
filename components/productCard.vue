@@ -27,6 +27,7 @@
             fab
             right
             top
+            @click="addToCart($event, product.id)"
           >
             <v-icon>mdi-cart</v-icon>
           </v-btn>
@@ -37,6 +38,7 @@
             fab
             top
             style="right: 90px"
+            @click="addToWishlist($event, product.id)"
           >
             <v-icon>mdi-heart</v-icon>
           </v-btn>
@@ -53,7 +55,16 @@
 <script>
     export default {
         props: ['image', 'id', 'title', 'price'],
-        name: "productCard"
+        name: "productCard",
+
+      methods: {
+        addToWishlist(e, id) {
+          this.$store.dispatch('wishListAndCart/setWishList', [id])
+        },
+        addToCart(e, id) {
+          this.$store.dispatch('wishListAndCart/setCArt', [id])
+        }
+      },
     }
 </script>
 

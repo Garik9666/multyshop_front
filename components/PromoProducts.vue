@@ -11,10 +11,10 @@
             </nuxt-link>
             <v-slide-y-reverse-transition>
               <v-card-text class="pt-6" style="position: absolute; bottom: 0; background-color: #f39513; height: 80px" >
-                <v-btn absolute color="#ea5a21" class="white--text" fab right top >
+                <v-btn absolute color="#ea5a21" @click="addToCart($event, product.id)" class="white--text" fab right top >
                   <v-icon>mdi-cart</v-icon>
                 </v-btn>
-                <v-btn absolute color="#ff0057" class="white--text" fab top style="right: 90px" >
+                <v-btn absolute color="#ff0057" @click="addToWishlist($event, product.id)" class="white--text" fab top style="right: 90px" >
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
                 <nuxt-link :to="`/product/${product.id}`">
@@ -37,6 +37,14 @@
     data: () => ({
       model: null,
     }),
+    methods: {
+      addToWishlist(e, id) {
+        this.$store.dispatch('wishListAndCart/setWishList', [id])
+      },
+      addToCart(e, id) {
+        this.$store.dispatch('wishListAndCart/setCArt', [id])
+      }
+    },
     computed: {
       products() {
         if(this.type === 'new'){

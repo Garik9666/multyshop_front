@@ -32,6 +32,7 @@ export default {
     await store.dispatch('products/filterAsType', ['new']);
     await store.dispatch('products/filterAsType', ['best']);
     await store.dispatch('products/filterAsType', ['sales']);
+    await store.dispatch('wishListAndCart/fetch');
   },
   components: {
     HeadSlider,

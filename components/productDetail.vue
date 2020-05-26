@@ -99,6 +99,7 @@
                 color="#ea5a21"
                 class="white--text"
                 rounded
+                @click="addToCart($event, product.id)"
               >
                 <v-icon left>mdi-cart</v-icon> Cart
               </v-btn>
@@ -106,6 +107,7 @@
                 color="#ff0057"
                 class="white--text"
                 rounded
+                @click="addToWishlist($event, product.id)"
               >
                 <v-icon left>mdi-heart</v-icon> Wish list
               </v-btn>
@@ -134,6 +136,15 @@
       this.product.product_size.forEach(elem => {
         this.productSizes.push(elem.name)
       });
+    },
+
+    methods: {
+      addToWishlist(e, id) {
+        this.$store.dispatch('wishListAndCart/setWishList', [id])
+      },
+      addToCart(e, id) {
+        this.$store.dispatch('wishListAndCart/setCArt', [id])
+      }
     },
     computed: {
       product() {

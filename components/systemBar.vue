@@ -31,12 +31,12 @@
                 </v-col>
                 <v-col md="4" sm="4" class="hidden-sm-and-down text-center">
                   <v-row justify="end" class="hidden-sm-and-down" no-gutters  id="dropdown-language">
-                    <v-badge color="error" content="6" >
+                    <v-badge color="error" :content="wishListLength" >
                       <v-btn :to="localePath('/wishlist')" color="#000" text class="my-2 nav_button" width="50px" >
                         <v-icon>mdi-heart-outline</v-icon>
                       </v-btn>
                     </v-badge>
-                    <v-badge color="error" content="6" >
+                    <v-badge color="error" :content="cartLength" >
                       <v-btn :to="localePath('/cart')" color="#000" text class="my-2 nav_button" width="50px" >
                         <v-icon >mdi-cart-outline</v-icon>
                       </v-btn>
@@ -239,6 +239,8 @@
       },
       data () {
           return {
+            wishlistCount: 0,
+            cartCount: 0,
             registrationError: false,
             loginError: false,
             fab: false,
@@ -377,9 +379,23 @@
       computed: {
         brands() {
           return this.$store.getters['brands/brands'];
+        },
+        wishListLength(){
+          return this.$store.getters['wishListAndCart/wishListLength']
+        },
+        cartLength(){
+          return this.$store.getters['wishListAndCart/cartLength']
         }
       },
       mounted () {
+        let cookieResWishlist = this.$cookies.get('armmall_wishlist');
+        if(cookieResWishlist !== undefined){
+          this.wishlistCount = cookieResWishlist.length
+        }
+        let cookieResCart = this.$cookies.get('armmall_cart');
+        if(cookieResCart !== undefined){
+          this.cartCount = cookieResCart.length
+        }
         this.onResize();
         console.log(this.brands)
         this.brands.forEach(elem => {
