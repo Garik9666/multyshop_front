@@ -10,7 +10,7 @@ export const mutations = {
   setCategory(state, category){
     state.category = category;
   }
-}
+};
 
 export const actions = {
   async fetch({commit}) {
@@ -30,9 +30,9 @@ export const actions = {
   async addCategory(ctx, [name, order, image, color, selectedBrand, parentCategory]) {
     await this.$axios.$post('http://apidavmar.neoteric-software.com/api/category/add', {'name': name, 'order': order, 'image': image, 'color': color, 'selectedBrand': selectedBrand, 'parentCategory': parentCategory});
   }
-}
+};
 
 export const getters = {
   categories: s => s.categories,
   category:  s => s.category
-}
+};

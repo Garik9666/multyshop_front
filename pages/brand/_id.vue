@@ -31,9 +31,15 @@
   import productCard from "../../components/productCard";
     export default {
       watchQuery: ["page"],
+
       async fetch({route, store}) {
         await store.dispatch('brands/getBrand', [route.params.id]);
         await store.dispatch('products/getProductByBrandId', [route.params.id, route.query.page]);
+        await store.dispatch('brands/getBrandFilters', [route.params.id]);
+        await store.dispatch('brands/fetch');
+        await store.dispatch('wishListAndCart/fetch');
+        await store.dispatch('menus/fetch');
+
       },
       layout: 'brand',
       components: {
@@ -49,11 +55,26 @@
           return this.$store.getters['products/productByBrand'];
         },
       },
+      beforeRouteLeave (to, from, next) {
+        this.$cookies.set('armmall_filter', [], {
+          path: '/',
+          maxAge: 10 * 365 * 24 * 60 * 60
+        });
+        next();
+      },
       methods:{
         next() {
-          this.$router.push({ query: { page: this.page } });
+          let cookieRes = this.$cookies.get('armmall_filter');
+          console.log(cookieRes);
+          if(cookieRes[2] === this.$route.params.id){
+            cookieRes.push(this.page)
+            this.$store.dispatch('products/Filter', cookieRes).then(r => {
+            })
+          }else{
+            this.$router.push({ query: { page: this.page } });
+          }
         }
-      }
+      },
     }
 </script>
 

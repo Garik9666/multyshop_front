@@ -9,7 +9,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :height="headerHeight"  color="#fff" style="justify-content: center; flex-wrap: wrap;" id="create" app>
+    <v-app-bar :height="headerHeight"  color="#fff" style="justify-content: center; flex-wrap: wrap;" id="create" app clipped-left>
             <v-col :lg="9" md="12" class="py-0">
               <v-row align="center" justify="space-between" style="position: relative">
                 <v-col md="2" sm="3" cols="5" class="text-center py-0">
@@ -67,7 +67,7 @@
                                     {{errors.email[0]}}
                                   </v-alert>
                                   <v-text-field v-model="loginForm.email" :rules="emailRules" label="E-mail" required ></v-text-field>
-                                  <v-text-field v-model="loginForm.password" :rules="passwordRules" label="Password" required ></v-text-field>
+                                  <v-text-field v-model="loginForm.password" type="password" :rules="passwordRules" label="Password" required ></v-text-field>
 
                                   <v-card-actions>
                                     <v-spacer></v-spacer>
@@ -141,7 +141,7 @@
                         <v-list-item-content style="align-items: normal">
 
                           <v-list-item-group v-if="item.items" style="max-width: 350px;">
-                            <v-list-item v-for="(item, index) in item.items" :key="index" style="text-align: center;" exact :to="localePath(item.to)">
+                            <v-list-item v-for="(item, index) in item.items" :key="index" style="text-align: center; float: left;" exact :to="localePath(item.to)">
                               <v-list-item-content class="">
                                 <v-list-item-group >
                                   <v-list-item-title>
@@ -235,7 +235,8 @@
     export default {
       props: ['header'],
       async fetch({store}) {
-        await store.dispatch('brands/fetch')
+        await store.dispatch('brands/fetch');
+        await store.dispatch('menus/fetch');
       },
       data () {
           return {
@@ -299,79 +300,18 @@
                 ],
               },
               { title: 'Sales',
-                to: '/'
+                to: '/sales'
               },
-              { title: 'News',
-                to: '/'
-              }
             ],
             rightSide: [
-              {
-                title: 'For Men',
-                to: '/brand/polo',
-                items: [
-                  {
-                    title: 'Shoes',
-                    to: '/',
-                    items: [
-                      {title: 'Shoes', to: '/'},
-                      {title: 'Clothing', to: '/'},
-                      {title: 'Bags', to: '/'},
-                      {title: 'Eyewear', to: '/'},
-                      {title: 'Watches', to: '/'},
-                    ],
-                  },
-                  {title: 'Clothing',  to: '/',
-                    items: [
-                      {title: 'Shoes', to: '/'},
-                      {title: 'Clothing', to: '/'},
-                      {title: 'Bags', to: '/'},
-                      {title: 'Eyewear', to: '/'},
-                      {title: 'Watches', to: '/'},
-                    ],
-                  },
-                  {title: 'Bags', to: '/',
-                    items: [
-                      {title: 'Shoes', to: '/'},
-                      {title: 'Clothing', to: '/'},
-                      {title: 'Bags', to: '/'},
-                      {title: 'Eyewear', to: '/'},
-                      {title: 'Watches', to: '/'},
-                    ],
-                  },
-                  {title: 'Eyewear',  to: '/',
-                    items: [
-                      {title: 'Shoes', to: '/'},
-                      {title: 'Clothing', to: '/'},
-                      {title: 'Bags', to: '/'},
-                      {title: 'Eyewear', to: '/'},
-                      {title: 'Watches', to: '/'},
-                    ],
-                  },
-                ],
-              },
-              {
-                title: 'For Women',
-                to: '/brand/polo',
-                items: [
-                  {title: 'Shoes', to: '/'},
-                  {title: 'Clothing', to: '/'},
-                  {title: 'Bags', to: '/'},
-                  {title: 'Eyewear', to: '/'},
-                  {title: 'Watches', to: '/'},
-                ],
-              },
+
               {
                 title: 'Delivery conditions',
-                to: '/'
+                to: '/deliveryCondition'
               },
               {
                 title: 'About us',
-                to: '/'
-              },
-              {
-                title: 'Contact',
-                to: '/'
+                to: '/aboutUs'
               }
             ],
           }
@@ -380,14 +320,39 @@
         brands() {
           return this.$store.getters['brands/brands'];
         },
+        categories(){
+          return this.$store.getters['categories/categories'];
+        },
         wishListLength(){
           return this.$store.getters['wishListAndCart/wishListLength']
         },
         cartLength(){
           return this.$store.getters['wishListAndCart/cartLength']
+        },
+        menus() {
+          return this.$store.getters['menus/menus'];
         }
       },
       mounted () {
+        for(let menu of this.menus.menus){
+          let menusConstruct = JSON.parse(this.menus.menus[0].construction);
+          for(let item of menusConstruct){
+            let mainMenu = {
+              title: item.name,
+              to: '/category/' + item.id + '?page=1',
+              items: []
+            };
+            if(item.menus.length > 0){
+              for(let menuItem of item.menus){
+                console.log(menuItem);
+
+                mainMenu.items.push({title: menuItem.name, to: '/category/' + menuItem.id + '?page=1'})
+              }
+            }
+            this.rightSide.unshift(mainMenu);
+          }
+
+        }
         let cookieResWishlist = this.$cookies.get('armmall_wishlist');
         if(cookieResWishlist !== undefined){
           this.wishlistCount = cookieResWishlist.length
@@ -397,11 +362,10 @@
           this.cartCount = cookieResCart.length
         }
         this.onResize();
-        console.log(this.brands)
         this.brands.forEach(elem => {
           this.leftSide[0].items.push(
             { title: elem.name,
-              to: '/brand/'+elem.id,
+              to: '/brand/'+elem.id+'?page=1',
             }
           )
         })
@@ -486,6 +450,12 @@
     color: #FFFFFF !important;
     display: block;
     width: 145px;
-    float: left;
+    /*float: left;*/
+  }
+  .v-list-item-group .v-list-item--active {
+    color: inherit;
+    text-align: center;
+    /*float: left;*/
+    width: 145px;
   }
 </style>

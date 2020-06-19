@@ -21,7 +21,8 @@
     "swiper": "^5.3.8",
     "vee-validate": "^3.3.0",
     "vue-analytics": "^5.22.1",
-    "vue-product-zoomer": "^3.0.0"
+    "vue-product-zoomer": "^3.0.0",
+    "vuedraggable": "^2.23.2"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.2"

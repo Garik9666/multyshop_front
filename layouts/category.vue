@@ -3,7 +3,7 @@
     <v-system-bar fixed app height="5" dark color="#ea5a21" style="justify-content: center;">
     </v-system-bar>
     <SystemBar></SystemBar>
-<!--    <TopMenu></TopMenu>-->
+    <!--    <TopMenu></TopMenu>-->
     <Filters></Filters>
     <v-content>
       <nuxt />
@@ -24,7 +24,7 @@
   import MainDividers from "../components/MainDividers";
   import  SystemBar from '../components/systemBar'
   import TopMenu from '../components/Topmenu'
-  import Filters from "../components/Filters";
+  import Filters from "../components/CategoryFilters";
   import Cookie from "../components/Cookie.vue";
 
   export default {

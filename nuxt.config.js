@@ -42,7 +42,8 @@ export default {
     {
       src: './plugins/GoogleAnalytics.js',
       mode: 'client'
-    }
+    },
+    { src: '~plugins/vuedraggable.js', ssr: false }
   ],
   auth: {
     strategies: {

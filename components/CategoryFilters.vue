@@ -6,16 +6,6 @@
       app
       clipped
     >
-      <v-list-item class="px-2 mt-3">
-        <v-img :src="brand[0].image" width="80%"  :contain="true"></v-img>
-        <v-btn
-          icon
-          @click.stop="mini = !mini"
-        >
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
-      </v-list-item>
-
       <v-divider></v-divider>
       <v-list class="mt-5">
         <v-list-item class="mt-5">
@@ -94,7 +84,7 @@
          path: '/',
          maxAge: 10 * 365 * 24 * 60 * 60
        });
-        this.$store.dispatch('products/Filter', [this.items, this.range, this.$route.params.id]).then(r => {
+        this.$store.dispatch('products/FilterByCategory', [this.items, this.range, this.$route.params.id]).then(r => {
           // this.$router.push('/dashboard/categories')
         })
       }
@@ -104,7 +94,7 @@
         return this.$store.getters['brands/brand'];
       },
       filters() {
-        return this.$store.getters['brands/brandFilters'];
+        return this.$store.getters['products/categoryFilter'];
       }
     }
   }

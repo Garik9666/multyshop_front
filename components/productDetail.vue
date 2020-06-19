@@ -1,5 +1,9 @@
 <template>
   <div class="mt-3">
+    <ProductZoomer
+      :base-images="images"
+      :base-zoomer-options="zoomerOptions"
+    />
     <v-row>
       <v-col md="6" sm="12">
         <v-carousel
@@ -29,7 +33,7 @@
           <div class="mt-5">
             <p class="ma-0">Colors</p>
             <v-item-group
-              :multiple="true"
+              :multiple="false"
             >
               <v-row>
                 <v-item  v-for="(color, n) in productColors" :key="n" v-slot:default="{ active, toggle }">
@@ -39,7 +43,8 @@
                     dark
                     height="30"
                     width="30"
-                    @click="toggle"
+                    :data-value="color.toLowerCase()"
+                    @click="toggle(), selectColor($event)"
                   >
                     <v-scroll-y-transition>
                       <v-icon
@@ -48,6 +53,7 @@
                         size="20"
                         v-text="'mdi-close-circle-outline'"
                         class="mx-auto"
+                        :data-value="color.toLowerCase()"
                       ></v-icon>
                     </v-scroll-y-transition>
                   </v-card>
@@ -58,16 +64,18 @@
           <div class="mt-5">
             <p class="ma-0">Sizes</p>
             <v-item-group
-              :multiple="true"
+              :multiple="false"
             >
               <v-row>
                 <v-item  v-for="(size, n) in productSizes" :key="n" v-slot:default="{ active, toggle }">
                   <v-card
                     class="d-flex text-center align-center mx-3 justify-center"
                     :color="active? 'green' : '#fff'"
+                    :data-active="active? 'active' : 'disactive'"
                     height="30"
                     width="30"
-                    @click="toggle"
+                    :data-value="size"
+                    @click="toggle(), selectSize($event)"
                   >
                     {{size}}
                   </v-card>
@@ -82,6 +90,7 @@
               <v-text-field
                 type="number"
                 placeholder="0"
+                v-model="count"
               ></v-text-field>
             </v-col>
           </div>
@@ -126,7 +135,54 @@
       return {
         productColors: [],
         productSizes: [],
+        selectedColor: [],
+        selectedSize: [],
         cycle: false,
+        count: 1,
+        'images': {
+          'thumbs': [
+            {
+              'id': 1,
+              'url': '/jins1.jpg'
+            },
+            {
+              'id': 2,
+              'url': '/jins1.jpg'
+            }
+          ],
+          'normal_size': [
+            {
+              'id': 1,
+              'url': '/jins1.jpg'
+            },
+            {
+              'id': 2,
+              'url': '/jins1.jpg'
+            }
+          ],
+          'large_size': [
+            {
+              'id': 1,
+              'url': '/jins1.jpg'
+            },
+            {
+              'id': 2,
+              'url': '/jins1.jpg'
+            }
+          ]
+        },
+        'zoomerOptions': {
+          zoomFactor: 3, // scale for zoomer
+          pane: 'pane', // three type of pane ['pane', 'container-round', 'container']
+          hoverDelay: 300, // how long after the zoomer take effect
+          namespace: 'zoomer', // add a namespace for zoomer component, useful when on page have mutiple zoomer
+          move_by_click:false, // move image by click thumb image or by mouseover
+          scroll_items: 5, // thumbs for scroll
+          choosed_thumb_border_color: "#bbdefb", // choosed thumb border color
+          scroller_button_style: "line",
+          scroller_position: "left",
+          zoomer_pane_position: "right"
+        }
       }
     },
     mounted() {
@@ -140,10 +196,40 @@
 
     methods: {
       addToWishlist(e, id) {
-        this.$store.dispatch('wishListAndCart/setWishList', [id])
+        let user_id = 0;
+        if(this.user){
+          user_id = this.user.id
+        }
+        this.$store.dispatch('wishListAndCart/setWishList', [id, user_id, this.selectedColor, this.selectedSize, this.count])
       },
       addToCart(e, id) {
-        this.$store.dispatch('wishListAndCart/setCArt', [id])
+        let user_id = 0;
+        if(this.user){
+          user_id = this.user.id
+        }
+        this.$store.dispatch('wishListAndCart/setCArt', [id, user_id, this.selectedColor, this.selectedSize, this.count])
+      },
+      selectColor(e) {
+        if(e.target !== undefined){
+          if(e.target.tagName === 'DIV' || e.target.tagName === 'I'){
+            if(e.target.tagName === 'I'){
+              console.log(e.target.getAttribute('data-value'));
+              console.log(this.selectedColor.indexOf(e.target.getAttribute('data-value')));
+              this.$delete(this.selectedColor, this.selectedColor.indexOf(e.target.getAttribute('data-value')));
+            }else{
+              this.selectedColor.push(e.target.getAttribute('data-value'));
+            }
+          }
+        }
+      },
+      selectSize(e) {
+        if(e.target !== undefined){
+          if(e.target.getAttribute('data-active') === 'active'){
+             this.$delete(this.selectedSize, this.selectedSize.indexOf(e.target.getAttribute('data-value')));
+           }else{
+             this.selectedSize.push(e.target.getAttribute('data-value'));
+           }
+        }
       }
     },
     computed: {
@@ -153,3 +239,8 @@
     },
   }
 </script>
+<style scoped>
+  i{
+    font-size: 30px !important;
+  }
+</style>

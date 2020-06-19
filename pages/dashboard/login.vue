@@ -51,6 +51,7 @@
       async loginAction() {
         await this.$auth.login({data: this.loginForm}).then(response => {
           this.menu = false;
+          console.log(response);
           this.$router.push('/dashboard')
         }).catch(e => {
           this.loginError = e.response;

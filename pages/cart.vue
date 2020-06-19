@@ -7,7 +7,7 @@
                       <v-img :src="item.image" :contain="true" width="100" height="100" ></v-img>
                     </template>
                     <template v-slot:item.count="{ item }">
-                      <v-text-field type="number" placeholder="0" v-model="item.count" style="max-width: 60px; margin: 0 auto !important; text-align: center" min="1" ></v-text-field>
+                      <v-text-field type="number" @input="summCount()" @change="cahngeCount(item)" placeholder="0" v-model="item.count" style="max-width: 60px; margin: 0 auto !important; text-align: center" min="1" ></v-text-field>
                     </template>
                     <template v-slot:item.color="{ item }">
                       <v-card :color="item.color.toLowerCase()" class="d-flex text-center align-center mx-3" dark height="30" width="30" style="margin: 0 auto !important;" >
@@ -131,6 +131,16 @@
 <script>
   var PhoneNumber = require( 'awesome-phonenumber' );
     export default {
+      async fetch({store}){
+        await store.dispatch('brands/fetch');
+        await store.dispatch('wishListAndCart/fetch');
+        if(this.user){
+          await store.dispatch('wishListAndCart/getWishListAndCartData', [this.user.id]);
+        }else{
+          await store.dispatch('wishListAndCart/getWishListAndCartData', [0]);
+        }
+        await store.dispatch('menus/fetch');
+      },
       name: "cart",
       data () {
           return {
@@ -173,58 +183,57 @@
               { text: 'Remove', value: 'remove',  sortable: false,  align: 'center', },
             ],
             desserts: [
-              {
-                image: '/jins1.jpg',
-                name: 'Frozen Yogurt',
-                size: "XL",
-                color: 'Blue',
-                count: 1,
-                price: 15000,
-                remove: 'mdi-delete',
-              },
-              {
-                image: '/jins3.jpg',
-                name: 'Frozen Yogurt',
-                size: 'M',
-                color: 'Black',
-                count: 1,
-                price: 16000,
-                remove: 'mdi-delete',
-              },
-              {
-                image: '/jins3.jpg',
-                name: 'Frozen Yogurt',
-                size: 'M',
-                color: 'Black',
-                count: 5,
-                price: 16000,
-                remove: 'mdi-delete',
-              },
-              {
-                image: '/jins3.jpg',
-                name: 'Frozen Yogurt',
-                size: 'M',
-                color: 'Black',
-                count: 1,
-                price: 16000,
-                remove: 'mdi-delete',
-              },
-              {
-                image: '/jins3.jpg',
-                name: 'Frozen Yogurt',
-                size: 'M',
-                color: 'Black',
-                count: 1,
-                price: 16000,
-                remove: 'mdi-delete',
-              }
+
             ],
           }
       },
-      mounted() {
-        this.summCount();
+      computed: {
+        menus() {
+          return this.$store.getters['menus/menus'];
+        },
+        cartProducts() {
+          let cookieResCart = this.$cookies.get('armmall_cart');
+          if(cookieResCart !== undefined){
+            this.$store.dispatch('products/getProductsByIds', [cookieResCart]);
+            return this.$store.getters['products/productByIds'];
+          }
+        },
+        cartData() {
+          return this.$store.getters['wishListAndCart/cartData'];
+        }
+      },
+      async mounted() {
+        this.cartData.forEach((elem, key) => {
+          console.log(elem);
+          this.desserts.push({
+            image: JSON.parse(elem.product.images)[0],
+            name: elem.product.name,
+            size: elem.size[0] !== undefined ? elem.size[0] : elem.color,
+            color: elem.color[0] !== undefined && elem.color[0] !== '#' ? elem.color[0] : elem.color,
+            count: elem.count,
+            price: elem.product.price,
+            remove: key,
+          })
+        });
+        await this.summCount();
+
       },
       methods: {
+        init() {
+          this.desserts = [];
+          this.cartData.forEach((elem, key) => {
+            console.log(key);
+            this.desserts.push({
+              image: JSON.parse(elem.product.images)[0],
+              name: elem.product.name,
+              size: elem.size[0] !== undefined ? elem.size[0] : '',
+              color: elem.color[0] !== undefined ? elem.color[0] : '',
+              count: elem.count,
+              price: elem.product.price,
+              remove: key,
+            })
+          });
+        },
         changeState() {
           if(this.state !== 'Yerevan'){
             this.totalPrice = this.totalPrice + 3000
@@ -232,16 +241,39 @@
             this.totalPrice = this.totalPriceWithoutDelivery
           }
         },
-        deleteItem (item) {
-          const index = this.desserts.indexOf(item)
-          confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1) && this.summCount();
+        async deleteItem (item) {
+          const index = this.desserts.indexOf(item);
+          let user_id = 0;
+          if(this.user){
+            user_id = this.user.id;
+          }
+          if(confirm('Are you sure you want to delete this item?')){
+            this.desserts.splice(index, 1);
+            await this.$store.dispatch('wishListAndCart/removeFromCart', [index, user_id]).then(() => {
+              this.init();
+              this.summCount();
+            });
+
+          }
         },
-        summCount() {
+        async cahngeCount(item) {
+          console.log(item);
+          const index = this.desserts.indexOf(item);
+          let user_id = 0;
+          if(this.user){
+            user_id = this.user.id;
+          }
+          this.$store.dispatch('wishListAndCart/updateFromCart', [index, user_id, item.count]).then(() => {
+            this.init();
+            this.summCount();
+          });
+        },
+        async summCount() {
           this.count = 0;
           this.totalPrice = 0;
           this.desserts.forEach(elem => {
-            this.count += elem.count
-            this.totalPrice += elem.price
+            this.count += parseInt(elem.count);
+            this.totalPrice += elem.price * elem.count;
           })
         }
       }

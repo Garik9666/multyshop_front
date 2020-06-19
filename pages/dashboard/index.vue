@@ -9,7 +9,6 @@
 <script>
     export default {
       layout: 'dashboard',
-        middleware: 'admin',
         name: "index"
     }
 </script>

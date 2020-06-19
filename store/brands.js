@@ -1,4 +1,5 @@
 export const state = () => ({
+  brandFilters: [],
   brands: [],
   brand: []
 });
@@ -9,6 +10,9 @@ export const mutations = {
   },
   setBrand(state, brand){
     state.brand = brand;
+  },
+  setBrandFilters(state, brandFilters){
+    state.brandFilters = brandFilters;
   }
 }
 
@@ -21,6 +25,11 @@ export const actions = {
     const brand = await this.$axios.$get(`http://apidavmar.neoteric-software.com/api/brand/get/${id}`);
     commit('setBrand', brand)
   },
+  async getBrandFilters({commit}, [id]){
+    const brandFilters = await this.$axios.$get(`http://apidavmar.neoteric-software.com/api/product/getFilters/${id}`);
+    commit('setBrandFilters', brandFilters)
+  },
+
   async updateBrand({commit}, [id, name, order, image, color]){
     const brand = await this.$axios.$put(`http://apidavmar.neoteric-software.com/api/brand/update/${id}`, {'name': name, 'order': order, 'image': image, 'color': color});
   },
@@ -34,5 +43,6 @@ export const actions = {
 
 export const getters = {
     brands: s => s.brands,
-    brand:  s => s.brand
+    brand:  s => s.brand,
+    brandFilters:  s => s.brandFilters,
 }

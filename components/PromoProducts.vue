@@ -39,10 +39,18 @@
     }),
     methods: {
       addToWishlist(e, id) {
-        this.$store.dispatch('wishListAndCart/setWishList', [id])
+        let user_id = 0;
+        if(this.user){
+          user_id = this.user.id
+        }
+        this.$store.dispatch('wishListAndCart/setWishList', [id, user_id])
       },
       addToCart(e, id) {
-        this.$store.dispatch('wishListAndCart/setCArt', [id])
+        let user_id = 0;
+        if(this.user){
+          user_id = this.user.id
+        }
+        this.$store.dispatch('wishListAndCart/setCArt', [id, user_id])
       }
     },
     computed: {
